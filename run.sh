@@ -5,4 +5,5 @@ while true; do
 		echo "`date`: Starting insync-portable"
 		/app/insync-portable/insync-portable start
 	fi
+	sleep 60
 done
