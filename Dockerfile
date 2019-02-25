@@ -17,7 +17,7 @@ RUN apt-get update -qq
 # install insync-headless
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C
 RUN add-apt-repository "deb http://apt.insynchq.com/ubuntu precise non-free contrib"
-RUN apt update && apt upgrade
+RUN apt update && apt upgrade -y
 RUN apt -y install insync-headless
 RUN apt clean
 
