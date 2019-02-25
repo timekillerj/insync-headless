@@ -12,14 +12,15 @@ CMD ["/sbin/my_init"]
 RUN usermod -u 99 nobody
 RUN usermod -g 100 nobody
 
-RUN apt-get update -qq
+RUN apt update -qq && apt upgrade -y
+RUN apt install wget bzip2
 
-# install insync-headless
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ACCAF35C
-RUN add-apt-repository "deb http://apt.insynchq.com/ubuntu precise non-free contrib"
-RUN apt update && apt upgrade -y
-RUN apt -y install insync-headless
-RUN apt clean
+WORKDIR /app
+RUN wget -q http://s.insynchq.com/builds/insync-portable_1.5.5.37367_amd64.tar.bz2
+RUN tar jxvf insync-portable_1.5.5.37367_amd64.tar.bz2
+WORKDIR /app/insync-portable
+RUN ./insync-portable start
+
 
 # manifest: expose, run
 # ENTRYPOINT ["/sbin/my_init"]
